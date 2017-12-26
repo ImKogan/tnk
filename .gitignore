@@ -1,6 +1,6 @@
 # Data created by script
 JPS
-txt_files
+json_files
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

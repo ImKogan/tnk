@@ -1,7 +1,15 @@
 {
 	"word_list": "/usr/share/dict/words",
 	"jps_url": "http://www.mechon-mamre.org/htmlzips/et002.zip",
-	"local_jps_html": "JPS"
-
+	"local_jps_html": "JPS",
+	"local_json": "json_files",
+	"bible": "bible.json",
+	"bible_names": "bible_names.json",
+	"bible_names_index": "bible_names_index.json",
+	"db_type": "postgresql",
+	"db_user": "isroel",
+	"db_pwd": "123abc",
+	"db_name": "mydatabase",
+	"db_port": "localhost"
 }
 
