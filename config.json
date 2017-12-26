@@ -7,8 +7,8 @@
 	"bible_names": "bible_names.json",
 	"bible_names_index": "bible_names_index.json",
 	"db_type": "postgresql",
-	"db_user": "isroel",
-	"db_pwd": "123abc",
+	"db_user": "user",
+	"db_pwd": "123",
 	"db_name": "mydatabase",
 	"db_port": "localhost"
 }
