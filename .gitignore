@@ -1,6 +1,7 @@
 # Data created by script
 JPS
 json_files
+db_config.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
