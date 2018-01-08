@@ -35,6 +35,9 @@ def irregular_words_not_in_list(word_list, bible_books_dict={}):
     return not_in_word_list
 
 def is_weird_word(dictionary, word_list):
+    '''
+    Complete filtering out words that are not proper names from names dictionary.
+    '''
     other_endings = [word for word in dictionary if word.endswith('eth') or \
     word.endswith('est') or word.endswith('ers') or word.endswith('ings')]
 
@@ -98,24 +101,26 @@ def main():
     ### regular_words is list containing uncapitalized words (words),
     ### and capitalized_words (words_capitalized)
     regular_words = words + words_capitalized
-    with open(os.path.join(options["local_json"], options["bible"]), 'r') as bible:
-        bible_books_dict = json.load(bible)
-
-    print(bible_books_dict.keys())
-
+    if os.path.exists(options["local_json"]):
+        with open(os.path.join(options["local_json"], options["bible"]), 'r') as bible:
+            bible_books_dict = json.load(bible)
+    else:
+        print("'local_json folder does not exists - you haven't run 'parse_html.py'.\n \
+            Please run 'get_jps.py' and 'parse_html.py' before running this script.")
+        return
     ### not_english is a dict with the words not in regular_words as keys
     ### and a list of indices (where in the bible these words occur) as values
     start = time()
     not_english = irregular_words_not_in_list(regular_words, bible_books_dict)
-    print('################################')
-    print(time()-start)
-    print('################################')
+    print("Seconds to create names index:", time()-start)
 
     not_english = is_weird_word(not_english, regular_words)
-    print(not_english, len(not_english))
+    print("Number of proper names:", len(not_english))
+    print("Proper names without index:", not_english.keys())
 
-    with open(os.path.join(options["local_json"], options["bible_names"]), 'w') as bible_names:
-        json.dump(not_english, bible_names, ensure_ascii=False)
+    with open(os.path.join(options["local_json"],
+                           options["bible_names_index"]), 'w') as bible_names_index:
+        json.dump(not_english, bible_names_index, ensure_ascii=False)
 
 if __name__ == '__main__':
     main()

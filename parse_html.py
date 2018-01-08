@@ -68,21 +68,26 @@ def main():
     with open("config.json") as config:
         options = json.load(config)
 
-    # ask about this configuration
+    htm_files = glob.glob(os.path.join(options["local_jps_html"], "et/et????*.htm"))
+    if len(htm_files) == 0:
+        print("'local_jps_html' folder is empty. Please run 'get_jps.py to download files.")
+        return
+    print("Number of chapters should be 929:", len(htm_files))
+    start = time()
+    soup_list = file_to_soup(htm_files)
+    print("Seconds to beautify html files:", time()-start)
+    chapter_list = []
+    start = time()
+    for soup in soup_list:
+        chapter_list.append(clean_soup(soup))
+    print("Seconds to convert BeautifulSoup objects to dict:", time()-start)
+    bible_books_dict = chapter_list_to_dict(chapter_list)
+    print("Number of books should be 39:", len(bible_books_dict))
 
     if os.path.exists(options["local_json"]):
         pass
     else:
         os.mkdir(options["local_json"])
-
-    htm_files = glob.glob(os.path.join(options["local_jps_html"], "et/et????*.htm"))
-    soup_list = file_to_soup(htm_files)
-    chapter_list = []
-    start = time()
-    for soup in soup_list:
-        chapter_list.append(clean_soup(soup))
-    print(time()-start)
-    bible_books_dict = chapter_list_to_dict(chapter_list)
 
     with open(os.path.join(options["local_json"], options["bible"]), 'w') as bible_json:
         json.dump(bible_books_dict, bible_json, ensure_ascii=False)
