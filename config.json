@@ -4,7 +4,6 @@
 	"local_jps_html": "JPS",
 	"local_json": "json_files",
 	"bible": "bible.json",
-	"bible_names": "bible_names.json",
-	"bible_names_index": "bible_names_index.json",
+	"bible_names_index": "bible_names_index.json"
 }
 
