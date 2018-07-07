@@ -31,7 +31,11 @@ def main():
         name = input("Please enter the name to search: ")
 
         if bible_names_index.get(name) is not None:
-            print(bible_names_index[name])
+            index_list = []
+            for item in bible_names_index[name]:
+                index = [item[0], item[1] + 1, item[2] + 1]
+                index_list.append(index)
+            print(index_list)
         else:
             print("There is no such name in the bible.")
         key = input("If you are done searching, type 'x' , otherwise press 'Enter' key:")

@@ -10,7 +10,7 @@ from collections import defaultdict
 from time import time
 
 
-def irregular_words_not_in_list(word_list, bible_books_dict={}):
+def irregular_words_not_in_list(word_list, bible_books_dict=None):
     '''
     filter out all words in word_list occuring in bible_books_dict and return the rest in a dict
     '''

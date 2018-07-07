@@ -1,3 +1,5 @@
+#!usr/bin/python3
+
 '''
 parse_html.py
 
@@ -68,6 +70,12 @@ def main():
     with open("config.json") as config:
         options = json.load(config)
 
+    if os.path.exists(options["local_json"]):
+        print('"%s" exists. already parsed.'%options["local_json"])
+        return
+    else:
+        os.mkdir(options["local_json"])
+
     htm_files = glob.glob(os.path.join(options["local_jps_html"], "et/et????*.htm"))
     if len(htm_files) == 0:
         print("'local_jps_html' folder is empty. Please run 'get_jps.py to download files.")
@@ -83,11 +91,6 @@ def main():
     print("Seconds to convert BeautifulSoup objects to dict:", time()-start)
     bible_books_dict = chapter_list_to_dict(chapter_list)
     print("Number of books should be 39:", len(bible_books_dict))
-
-    if os.path.exists(options["local_json"]):
-        pass
-    else:
-        os.mkdir(options["local_json"])
 
     with open(os.path.join(options["local_json"], options["bible"]), 'w') as bible_json:
         json.dump(bible_books_dict, bible_json, ensure_ascii=False)

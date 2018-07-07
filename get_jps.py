@@ -4,10 +4,10 @@ get_jps.py
 TODO(IK) here put description of file
 '''
 import os
+import json
 from io import BytesIO
 from urllib.request import urlopen
 from zipfile import ZipFile
-import json
 
 def get_jps(url, path):
     '''
